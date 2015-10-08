@@ -40,6 +40,7 @@ ActionBar.TabListener{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		viewPager = (NonSwipeableViewPager) findViewById(R.id.pager);
+		viewPager.invalidate();
 		bd=new Bundle();
 		path = getFilesDir().getAbsolutePath();
 		file = new File(path + "/question.txt");

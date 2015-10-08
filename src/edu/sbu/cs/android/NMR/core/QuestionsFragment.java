@@ -18,6 +18,7 @@ import org.json.JSONObject;
 
 import edu.sbu.cs.android.R;
 import android.app.ActionBar;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
@@ -55,6 +56,7 @@ public class QuestionsFragment extends Fragment implements OnItemClickListener, 
 	 Spinner spinner;
 	 //Spinner spinner2;
 	 File file;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -88,7 +90,7 @@ public class QuestionsFragment extends Fragment implements OnItemClickListener, 
 		
 			lv.setOnItemClickListener(this);
 			//reSet();
-	        
+
 	         
 		return rootView;
 	}
@@ -210,7 +212,14 @@ public class QuestionsFragment extends Fragment implements OnItemClickListener, 
 		protected Void doInBackground(Void... params) {
 			jsondata=readFromFile();
 			JSONArray ja;
-				
+            Fragment questionsFragment = getActivity().getSupportFragmentManager().findFragmentById(R.layout.fragment_questions);
+            if (questionsFragment instanceof Fragment) {
+                    android.support.v4.app.FragmentTransaction fragTran;
+                    fragTran= (getActivity()).getSupportFragmentManager().beginTransaction();
+                    fragTran.detach(questionsFragment);
+                    fragTran.attach(questionsFragment);
+                    fragTran.commit();
+            }
 			try{
 				ja=new JSONArray(jsondata);
 				
@@ -253,4 +262,7 @@ public class QuestionsFragment extends Fragment implements OnItemClickListener, 
 	public void onNothingSelected(AdapterView<?> arg0) {
 		
 	}
+
+
+
 }
