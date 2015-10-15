@@ -48,6 +48,7 @@ GridView gridview;
         gridview.setAdapter(new ImageAdapter(gridview.getContext()));
         gridview.setOnItemClickListener(new OnItemClickListener() 
         	{
+			
             public void onItemClick(AdapterView<?> parent, View v,
                     int position, long id)
             		{          			

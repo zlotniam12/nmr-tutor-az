@@ -211,6 +211,9 @@ ActionBar.TabListener{
 
 	@Override
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+//        ft.detach(questionsfragment);
+//        ft.attach(tab);
+//        ft.commit();
 	}
 	
 	@Override
