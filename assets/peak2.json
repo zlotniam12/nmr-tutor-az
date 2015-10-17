@@ -1,7 +1,7 @@
 [
   {
 		"QuestionTitle": "Integration Ratio",	
-		"Question": "TEST What is the integration ratio for peak A? ",
+		"Question": "TEST? ",
 		"Answer": "2",
 		"isCorrect": "false",
 		"Peak": "Peak A",
@@ -9,7 +9,7 @@
 	},
 	{	
 		"QuestionTitle": "Integration",
-		"Question": "How many hydrogens associated with peak A?",
+		"Question": "PLS WORK",
 		"Answer": "1",
 		"isCorrect": "false",
 		"Peak": "Peak A",

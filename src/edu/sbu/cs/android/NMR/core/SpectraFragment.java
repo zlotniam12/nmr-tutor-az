@@ -1,13 +1,14 @@
 package edu.sbu.cs.android.NMR.core;
 
 import edu.sbu.cs.android.R;
+
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
-
 
 public class SpectraFragment extends Fragment {
 
@@ -23,8 +24,14 @@ static WebView  w;
 		w.getSettings().setBuiltInZoomControls(true);
 		w.getSettings().setDisplayZoomControls(false);
 		return rootView;
+
 	}
-	
+	public void onAttach(Activity activity){
+		super.onAttach(activity);
+
+		//super.onCreateView();
+
+	}
 }
 
 

@@ -16,6 +16,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Activity;
 import edu.sbu.cs.android.R;
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
@@ -42,7 +43,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class QuestionsFragment extends Fragment implements OnItemClickListener, OnItemSelectedListener {
-	  private ListView lv;
+    OnItemClickListener mListener;
+	   private ListView lv;
 	  AnswerDialog answerDialog;
 	  ArrayList<String> qlist;
 	  ArrayList<Question> questions;
@@ -94,7 +96,7 @@ public class QuestionsFragment extends Fragment implements OnItemClickListener, 
 	         
 		return rootView;
 	}
-	
+
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
        if(!qlist.isEmpty()){
@@ -122,7 +124,6 @@ public class QuestionsFragment extends Fragment implements OnItemClickListener, 
 	        task.execute();
 	         
 	    }
-
 		public void writeToString(File file,String str){
 			FileOutputStream stream = null;
 			try {
@@ -212,14 +213,7 @@ public class QuestionsFragment extends Fragment implements OnItemClickListener, 
 		protected Void doInBackground(Void... params) {
 			jsondata=readFromFile();
 			JSONArray ja;
-            Fragment questionsFragment = getActivity().getSupportFragmentManager().findFragmentById(R.layout.fragment_questions);
-            if (questionsFragment instanceof Fragment) {
-                    android.support.v4.app.FragmentTransaction fragTran;
-                    fragTran= (getActivity()).getSupportFragmentManager().beginTransaction();
-                    fragTran.detach(questionsFragment);
-                    fragTran.attach(questionsFragment);
-                    fragTran.commit();
-            }
+
 			try{
 				ja=new JSONArray(jsondata);
 				
@@ -253,9 +247,45 @@ public class QuestionsFragment extends Fragment implements OnItemClickListener, 
 			}
 		     arrayAdapter = new ArrayAdapter<String>(getActivity(),R.layout.question_item,R.id.tvQTitle,qlist );
 	         lv.setAdapter(arrayAdapter);
+            Fragment questionsFragment = getActivity().getSupportFragmentManager().findFragmentById(R.layout.fragment_questions);
+            if (questionsFragment instanceof Fragment) {
+                android.support.v4.app.FragmentTransaction fragTran;
+                fragTran= (getActivity()).getSupportFragmentManager().beginTransaction();
+                fragTran.detach(questionsFragment);
+                fragTran.attach(questionsFragment);
+                fragTran.commit();
+            }
 			super.onPostExecute(result);
+
 		} 
-	
+//	    public void recreate(int pos)
+//        {
+//            file = new File(path + "/question.txt");
+//            if (!file.exists()) {
+//                writeToString(file,loadJSONFromAsset());
+//                Toast.makeText(getActivity(), readFromFile(),Toast.LENGTH_SHORT).show();
+//
+//            }
+//        };
+//@Override
+//public void onAttach(Activity activity) {
+//    super.onAttach(activity);
+//    try {
+//        file = new File(path + "/question.txt");
+//           if (!file.exists()) {
+//               writeToString(file, loadJSONFromAsset());
+//               Toast.makeText(getActivity(), readFromFile(), Toast.LENGTH_SHORT).show();
+//               mListener = (OnItemClickListener) context;
+//           }
+//    }
+//        catch (ClassCastException e) {
+//        throw new ClassCastException(context.toString() + " must implement OnArticleSelectedListener");
+//    }
+//}
+//        public void onCreate (Bundle savedInstanceState){
+//
+//        }
+
 	}
 
 	@Override

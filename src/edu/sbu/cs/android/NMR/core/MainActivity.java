@@ -12,8 +12,11 @@ import edu.sbu.cs.android.NMR.core.HomeFragment.OnItemSelectedListener;
 import edu.sbu.cs.android.R;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
@@ -22,9 +25,10 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 
-public class MainActivity extends FragmentActivity implements  OnItemSelectedListener,
+public class MainActivity extends FragmentActivity implements  HomeFragment.OnItemSelectedListener,
 ActionBar.TabListener{
 	Bundle bd;
+	Bundle bundle = new Bundle();
 	private NonSwipeableViewPager viewPager;
 	//DrawingView dv=new DrawingView(this,);
 	private TabsPagerAdapter mAdapter;
@@ -34,7 +38,7 @@ ActionBar.TabListener{
 	private boolean lock=false;
 	File file;
 	String path;
-	private int problem = 1;
+	private int problem = 0;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -238,7 +242,23 @@ ActionBar.TabListener{
 
 	@Override
 	public void onItemSelected() {
-		// TODO Auto-generated method stub
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        android.support.v4.app.Fragment newFragment = new SpectraFragment();
+        android.support.v4.app.FragmentTransaction transaction;
+        transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.layout.fragment_spectra, newFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+//		Fragment spectraFragment = getSupportFragmentManager().findFragmentById(R.layout.fragment_spectra);
+//		if (spectraFragment instanceof Fragment) {
+//			android.support.v4.app.FragmentTransaction fragTran;
+//			fragTran = (getSupportFragmentManager().beginTransaction());
+//			fragTran.detach(spectraFragment);
+//			fragTran.attach(spectraFragment);
+//			fragTran.commit();
+
+//		}
 		
 	}
 }
