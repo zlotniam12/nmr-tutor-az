@@ -4,6 +4,7 @@ import edu.sbu.cs.android.NMR.core.ImageAdapter;
 import edu.sbu.cs.android.NMR.core.HomeFragment;
 import edu.sbu.cs.android.R;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -18,19 +19,19 @@ import android.widget.AdapterView.OnItemClickListener;
 
 
 public class HomeFragment extends Fragment {
-	  public interface OnItemSelectedListener {
-	        public void onItemSelected();
-	    }
-	  OnItemClickListener mListener;
-	  @Override
-	    public void onAttach(Activity activity) {
-	        super.onAttach(activity);
-	        try {
-	            mListener = (OnItemClickListener) activity;
-	        } catch (ClassCastException e) {
-	            throw new ClassCastException(activity.toString() + " must implement OnArticleSelectedListener");
-	        }
-	    }
+//	  public interface OnItemSelectedListener {
+//	        public void onItemSelected();
+//	    }
+//	  OnItemClickListener mListener;
+//	  @Override
+//	    public void onAttach(Activity activity) {
+//	        super.onAttach(activity);
+//	        try {
+//	            mListener = (OnItemClickListener) activity;
+//	        } catch (ClassCastException e) {
+//	            throw new ClassCastException(activity.toString() + " must implement OnArticleSelectedListener");
+//	        }
+//	    }
 //	    public void onGridItemClick(GridView gridview, View v, int position, long id) {
 //	        // Append the clicked item's row ID with the content provider Uri
 //	        
@@ -52,7 +53,10 @@ GridView gridview;
                                     int position, long id) {
 
                 ((MainActivity) getActivity()).setProblem(position);
-              //  ((MainActivity) getActivity()).recreate();
+                ((MainActivity) getActivity()).recreate();
+//                Intent intent = getIntent();
+//                finish();
+//                startActivity(intent);
  //               Fragment spectraFragment = getActivity().getSupportFragmentManager().findFragmentById(R.layout.fragment_spectra);
 //                if (spectraFragment instanceof Fragment) {
 //                    android.support.v4.app.FragmentTransaction fragTran;
@@ -61,7 +65,7 @@ GridView gridview;
 //                    fragTran.attach(spectraFragment);
 //                    fragTran.commit();
 //                }
-                ((MainActivity) getActivity()).onItemSelected();
+               // ((MainActivity) getActivity()).onItemSelected();
               //  Toast.makeText(getActivity(), " " + ((MainActivity) getActivity()).getProblem(), Toast.LENGTH_SHORT).show();
             }
         });

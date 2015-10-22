@@ -22,7 +22,7 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
 			// Home fragment activity
 			return new HomeFragment();
 		case 1:
-			// draw fragment activity
+			// Spectra fragment activity
 			return new SpectraFragment();
 		case 2:
 			// Questions fragment activity

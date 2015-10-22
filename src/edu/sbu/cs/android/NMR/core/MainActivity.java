@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import edu.sbu.cs.android.NMR.adapter.TabsPagerAdapter;
-import edu.sbu.cs.android.NMR.core.HomeFragment.OnItemSelectedListener;
+//import edu.sbu.cs.android.NMR.core.HomeFragment.OnItemSelectedListener;
 import edu.sbu.cs.android.R;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
@@ -25,7 +25,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 
-public class MainActivity extends FragmentActivity implements  HomeFragment.OnItemSelectedListener,
+public class MainActivity extends FragmentActivity implements  //HomeFragment.OnItemSelectedListener,
 ActionBar.TabListener{
 	Bundle bd;
 	Bundle bundle = new Bundle();
@@ -240,16 +240,16 @@ ActionBar.TabListener{
 	    this.problem = num;
 	}
 
-	@Override
-	public void onItemSelected() {
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        android.support.v4.app.Fragment newFragment = new SpectraFragment();
-        android.support.v4.app.FragmentTransaction transaction;
-        transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.layout.fragment_spectra, newFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+//	@Override
+//	public void onItemSelected() {
+//        FragmentManager fragmentManager = getFragmentManager();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//        android.support.v4.app.Fragment newFragment = new SpectraFragment();
+//        android.support.v4.app.FragmentTransaction transaction;
+//        transaction = getSupportFragmentManager().beginTransaction();
+//        transaction.replace(R.layout.fragment_spectra, newFragment);
+//        transaction.addToBackStack(null);
+//        transaction.commit();
 //		Fragment spectraFragment = getSupportFragmentManager().findFragmentById(R.layout.fragment_spectra);
 //		if (spectraFragment instanceof Fragment) {
 //			android.support.v4.app.FragmentTransaction fragTran;
@@ -260,5 +260,5 @@ ActionBar.TabListener{
 
 //		}
 		
-	}
+//	}
 }
