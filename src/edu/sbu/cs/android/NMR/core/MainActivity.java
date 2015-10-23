@@ -143,6 +143,7 @@ ActionBar.TabListener{
 	    	SpectraFragment.w.loadUrl("file:///android_asset/ir.html");
 	    	SpectraFragment.w.getSettings().setBuiltInZoomControls(true);
 	    	SpectraFragment.w.getSettings().setDisplayZoomControls(false);
+
 	        return true;
 	    case R.id.action_CNMR:
 	    	SpectraFragment.w.loadUrl("file:///android_asset/cnmr.html");

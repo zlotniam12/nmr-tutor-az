@@ -62,7 +62,7 @@ public class QuestionsFragment extends Fragment implements OnItemClickListener, 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-			
+
 			View rootView = inflater.inflate(R.layout.fragment_questions, container, false);
 			lv = (ListView) rootView.findViewById(R.id.lvQuestions);
 			spinner = (Spinner) rootView.findViewById(R.id.filter_spinner);
@@ -80,7 +80,7 @@ public class QuestionsFragment extends Fragment implements OnItemClickListener, 
 			if (!file.exists()) {
 				writeToString(file,loadJSONFromAsset());
 				Toast.makeText(getActivity(), readFromFile(),Toast.LENGTH_SHORT).show();
-				
+
 			}else{
 
 				//Toast.makeText(getActivity(), "does  exist",Toast.LENGTH_SHORT).show();
@@ -89,11 +89,11 @@ public class QuestionsFragment extends Fragment implements OnItemClickListener, 
 			// Apply the adapter to the spinner
 			spinner.setAdapter(adapter);
 			spinner.setOnItemSelectedListener(this);
-		
+
 			lv.setOnItemClickListener(this);
 			//reSet();
 
-	         
+
 		return rootView;
 	}
 
@@ -111,7 +111,7 @@ public class QuestionsFragment extends Fragment implements OnItemClickListener, 
      	 startActivity(i);
        }
 	}
-	 public void onItemSelected(AdapterView<?> parent, View view, 
+	 public void onItemSelected(AdapterView<?> parent, View view,
 	            int pos, long id) {
 		 		questions = new ArrayList<Question>();
 		 		qlist=new ArrayList<String>();
@@ -119,10 +119,10 @@ public class QuestionsFragment extends Fragment implements OnItemClickListener, 
 		 		//((TextView) parent.getChildAt(0)).setTextColor(Color.WHITE);
 //		 		selectedProblem = parent.getItemAtPosition(pos).toString();
 		 		selectedPeak= parent.getItemAtPosition(pos).toString();
-		 		
+
 	        task=new QuestionTask(selectedPeak); //selectedProblem
 	        task.execute();
-	         
+
 	    }
 		public void writeToString(File file,String str){
 			FileOutputStream stream = null;
@@ -167,7 +167,7 @@ public class QuestionsFragment extends Fragment implements OnItemClickListener, 
 					e.printStackTrace();
 				}
 			}
-			String contents = new String(bytes); 
+			String contents = new String(bytes);
 			return contents;
 
 		}
@@ -176,8 +176,7 @@ public class QuestionsFragment extends Fragment implements OnItemClickListener, 
 			String json = null;
 			try {
 
-				InputStream is = getActivity().getAssets().open("peak" + 
-				((MainActivity)getActivity()).getProblem()+".json");
+				InputStream is = getActivity().getAssets().open("peak0.json");
 				int size = is.available();
 
 				byte[] buffer = new byte[size];
@@ -201,9 +200,9 @@ public class QuestionsFragment extends Fragment implements OnItemClickListener, 
 	public QuestionTask(String p){//,r)
 		sentpeak=p;
 		//sentproblem=r;
-		
+
 	}
-	
+
 		@Override
 		protected void onPreExecute() {
 			//Toast.makeText(getActivity(),"preExcute: "+sentpeak ,Toast.LENGTH_SHORT).show();
@@ -216,9 +215,9 @@ public class QuestionsFragment extends Fragment implements OnItemClickListener, 
 
 			try{
 				ja=new JSONArray(jsondata);
-				
+
 			        for(int i=0;i<ja.length();i++){
-			        
+
 			          JSONObject json_data = ja.getJSONObject(i);
 			          qTitle=json_data.getString("QuestionTitle");
 			          qData=json_data.getString("Question");
@@ -232,7 +231,7 @@ public class QuestionsFragment extends Fragment implements OnItemClickListener, 
 			        	  questions.add(new Question(qTitle,qData,qAns,isCorrect,feedback));
 			        	  qlist.add(qTitle);
 			          }
-			          
+
 			        }
 
 			}catch (JSONException e) {
@@ -247,17 +246,17 @@ public class QuestionsFragment extends Fragment implements OnItemClickListener, 
 			}
 		     arrayAdapter = new ArrayAdapter<String>(getActivity(),R.layout.question_item,R.id.tvQTitle,qlist );
 	         lv.setAdapter(arrayAdapter);
-            Fragment questionsFragment = getActivity().getSupportFragmentManager().findFragmentById(R.layout.fragment_questions);
-            if (questionsFragment instanceof Fragment) {
-                android.support.v4.app.FragmentTransaction fragTran;
-                fragTran= (getActivity()).getSupportFragmentManager().beginTransaction();
-                fragTran.detach(questionsFragment);
-                fragTran.attach(questionsFragment);
-                fragTran.commit();
-            }
+//            Fragment questionsFragment = getActivity().getSupportFragmentManager().findFragmentById(R.layout.fragment_questions);
+//            if (questionsFragment instanceof Fragment) {
+//                android.support.v4.app.FragmentTransaction fragTran;
+//                fragTran= (getActivity()).getSupportFragmentManager().beginTransaction();
+//                fragTran.detach(questionsFragment);
+//                fragTran.attach(questionsFragment);
+//                fragTran.commit();
+           // }
 			super.onPostExecute(result);
 
-		} 
+		}
 //	    public void recreate(int pos)
 //        {
 //            file = new File(path + "/question.txt");
@@ -290,7 +289,7 @@ public class QuestionsFragment extends Fragment implements OnItemClickListener, 
 
 	@Override
 	public void onNothingSelected(AdapterView<?> arg0) {
-		
+
 	}
 
 

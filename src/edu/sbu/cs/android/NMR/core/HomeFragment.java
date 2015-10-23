@@ -44,16 +44,20 @@ GridView gridview;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-        Bundle bundle = new Bundle();
+//        Bundle bundle = new Bundle();
+//        bundle.putFloat("0", 1);
 		View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 		gridview = (GridView)rootView.findViewById(R.id.gridView1);
         gridview.setAdapter(new ImageAdapter(gridview.getContext()));
         gridview.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
-
                 ((MainActivity) getActivity()).setProblem(position);
-                ((MainActivity) getActivity()).recreate();
+ //               ((MainActivity) getActivity()).recreate();
+//                Fragment fragment = new SpectraFragment();
+//                bundle.putFloat("0", position);
+ //               fragment.setArguments(bundle);
+                       // .addToBackStack(TAG_TO_FRAGMENT).commit(); TAG_TO_FRAGMENT
 //                Intent intent = getIntent();
 //                finish();
 //                startActivity(intent);
@@ -66,7 +70,7 @@ GridView gridview;
 //                    fragTran.commit();
 //                }
                // ((MainActivity) getActivity()).onItemSelected();
-              //  Toast.makeText(getActivity(), " " + ((MainActivity) getActivity()).getProblem(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), " " + position, Toast.LENGTH_SHORT).show();
             }
         });
 
