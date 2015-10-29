@@ -14,7 +14,7 @@ import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -28,7 +28,8 @@ import android.widget.Toast;
 public class MainActivity extends FragmentActivity implements  //HomeFragment.OnItemSelectedListener,
 ActionBar.TabListener{
 	Bundle bd;
-	Bundle bundle = new Bundle();
+	Intent intent = new Intent();
+
 	private NonSwipeableViewPager viewPager;
 	//DrawingView dv=new DrawingView(this,);
 	private TabsPagerAdapter mAdapter;
@@ -39,6 +40,7 @@ ActionBar.TabListener{
 	File file;
 	String path;
 	private int problem = 0;
+    static Intent peakdata = new Intent();
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -53,7 +55,7 @@ ActionBar.TabListener{
 		mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
 		viewPager.setAdapter(mAdapter);
 		actionBar.setHomeButtonEnabled(false);
-		
+
 		actionBar.setIcon(R.drawable.chalkboardicon_2);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		// Adding Tabs
@@ -138,22 +140,26 @@ ActionBar.TabListener{
 	    	SpectraFragment.w.loadUrl("file:///android_asset/nmr.html");
 	    	SpectraFragment.w.getSettings().setBuiltInZoomControls(true);
 	    	SpectraFragment.w.getSettings().setDisplayZoomControls(false);
+
 	       return true;
 	    case R.id.action_IR:
-	    	SpectraFragment.w.loadUrl("file:///android_asset/ir.html");
+            SpectraFragment.w.loadUrl("file:///android_asset/ir.html");
 	    	SpectraFragment.w.getSettings().setBuiltInZoomControls(true);
 	    	SpectraFragment.w.getSettings().setDisplayZoomControls(false);
-
+            peakdata.putExtra("0", "peak2.json");
+//            Fragment questions = getSupportFragmentManager().findFragmentById(R.layout.fragment_questions);
+//            android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//            ft.detach(questions);
+//            ft.attach(questions);
+//            ft.commit();
 	        return true;
 	    case R.id.action_CNMR:
 	    	SpectraFragment.w.loadUrl("file:///android_asset/cnmr.html");
 	    	SpectraFragment.w.getSettings().setBuiltInZoomControls(true);
 	    	SpectraFragment.w.getSettings().setDisplayZoomControls(false);
 	        return true;
-	    case R.id.action_Reset:
 	    	//writeToString(file,loadJSONFromAsset());
 	    	//Toast.makeText(getApplication(),"reset act",Toast.LENGTH_SHORT).show();
-	        return true;
 	    case R.id.action_Lock:
 	    	lock=!lock;
 	    	if(lock)

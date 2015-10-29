@@ -20,8 +20,7 @@ static WebView  w;
 //        float flo = bundle.getFloat("0");
 		View rootView = inflater.inflate(R.layout.fragment_spectra, container, false);
 		w=(WebView)rootView.findViewById(R.id.imgView);
-		w.loadUrl("file:///android_asset/nmr" +
-                ((MainActivity)getActivity()).getProblem() + ".html");
+		w.loadUrl("file:///android_asset/nmr.html");
         w.getSettings().setBuiltInZoomControls(true);
 		w.getSettings().setDisplayZoomControls(false);
 		return rootView;

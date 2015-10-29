@@ -12,9 +12,9 @@
     <item android:id="@+id/action_CNMR"
           android:title=" Show CNMR" 
           android:showAsAction="never"/>
-    <item android:id="@+id/action_Reset"
+ <!--   <item android:id="@+id/action_Reset"
           android:title=" Reset Questions" 
-          android:showAsAction="never"/>
+          android:showAsAction="never"/> -->
     
     
 

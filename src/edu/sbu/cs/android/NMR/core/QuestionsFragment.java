@@ -51,6 +51,7 @@ public class QuestionsFragment extends Fragment implements OnItemClickListener, 
 	 ArrayAdapter<String> arrayAdapter;
 	 String jsondata, isCorrect, qData,qAns, qTitle, feedback, selectedPeak,path; //selectedProblem
 	 static String selectedPeak1;
+     Bundle extras;
 	 //static String selectedProblem1;
 	 static Question temp;
 	 QuestionTask task;
@@ -78,8 +79,8 @@ public class QuestionsFragment extends Fragment implements OnItemClickListener, 
 			path = getActivity().getFilesDir().getAbsolutePath();
 			file = new File(path + "/question.txt");
 			if (!file.exists()) {
-				writeToString(file,loadJSONFromAsset());
-				Toast.makeText(getActivity(), readFromFile(),Toast.LENGTH_SHORT).show();
+				writeToString(file, loadJSONFromAsset());
+				Toast.makeText(getActivity(), readFromFile(), Toast.LENGTH_SHORT).show();
 
 			}else{
 
@@ -176,7 +177,8 @@ public class QuestionsFragment extends Fragment implements OnItemClickListener, 
 			String json = null;
 			try {
 
-				InputStream is = getActivity().getAssets().open("peak0.json");
+                extras = MainActivity.peakdata.getExtras();
+				InputStream is = getActivity().getAssets().open(extras.getString("0"));
 				int size = is.available();
 
 				byte[] buffer = new byte[size];
