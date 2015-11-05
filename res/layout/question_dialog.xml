@@ -52,9 +52,15 @@
     <!-- added functionality of clear answer button -->
 
     <Spinner
+        android:id="@+id/answer_spinner"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:id="@+id/answerspinner" />
+        android:layout_height="45dp"
+        android:background="@android:drawable/dialog_holo_light_frame"
+        android:layout_marginBottom="1dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:text="[Select Answer Below: ]"
+        android:textColor="#ffffff" />
 
     <ImageView
             android:id="@+id/imageView1"

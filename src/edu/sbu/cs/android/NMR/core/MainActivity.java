@@ -12,8 +12,10 @@ import edu.sbu.cs.android.NMR.adapter.TabsPagerAdapter;
 import edu.sbu.cs.android.R;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
-import android.app.FragmentManager;
+//import android.app.FragmentManager;
+import android.support.v4.app.FragmentManager;
 import android.app.FragmentTransaction;
+//import android.support.v4.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -147,11 +149,11 @@ ActionBar.TabListener{
 	    	SpectraFragment.w.getSettings().setBuiltInZoomControls(true);
 	    	SpectraFragment.w.getSettings().setDisplayZoomControls(false);
             peakdata.putExtra("0", "peak2.json");
-//            Fragment questions = getSupportFragmentManager().findFragmentById(R.layout.fragment_questions);
-//            android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//            ft.detach(questions);
-//            ft.attach(questions);
-//            ft.commit();
+            Fragment questions = getSupportFragmentManager().findFragmentById(R.layout.fragment_questions);
+            android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.detach(questions);
+            ft.attach(questions);
+            ft.commit();
 	        return true;
 	    case R.id.action_CNMR:
 	    	SpectraFragment.w.loadUrl("file:///android_asset/cnmr.html");

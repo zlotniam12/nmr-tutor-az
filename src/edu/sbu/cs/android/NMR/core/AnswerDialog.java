@@ -31,10 +31,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,7 +45,8 @@ public class AnswerDialog extends FragmentActivity implements OnClickListener {
     String test;
     int num;
 	EditText mEditText;
-String qAns, qBody=" h" ,correct , ansCorrect,path;
+    Spinner spin;
+String qAns, qBody=" h" ,correct , ansCorrect,path, isDrop;
 TextView qData, feedback ,tvAns;
 Button bt;
 //Creates new button to clear selected answer.
@@ -52,6 +55,7 @@ Intent intent;
 File file;
 ImageView img;
 private ActionBar actionBar;
+	private String[] spinloader;
 protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.question_dialog);
@@ -59,6 +63,7 @@ protected void onCreate(Bundle savedInstanceState) {
 	file = new File(path + "/question.txt");
 	qData = (TextView)findViewById(R.id.tvQuestion);
 	 mEditText = (EditText)findViewById(R.id.etAnswer);
+	spin = (Spinner) findViewById(R.id.answer_spinner);
 	tvAns= (TextView)findViewById(R.id.tvAns);
 	 mEditText.setInputType(InputType.TYPE_CLASS_TEXT);
 	feedback = (TextView)findViewById(R.id.tvFeedback);
@@ -68,9 +73,18 @@ protected void onCreate(Bundle savedInstanceState) {
 	img=(ImageView)findViewById(R.id.imageView1);
 	bt.setOnClickListener(this);
 	intent = getIntent();
+	this.spinloader = new String[] {
+			"Word Answers here:", "singlet", "doublet", "triplet", "quartet", "d of d", "d of t", "multiplet",
+            "CH", "CH2", "CH3", "CH2X", "CH3X", "CHX", "alkene", "alkyne", "phenyl", "aldehyde",
+            "carboxylic acid", "exchangeable"
+	};
+	ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+			android.R.layout.simple_spinner_item, spinloader);
+	spin.setAdapter(adapter);
 	correct=intent.getExtras().getString("isCorrect");
 	qBody=intent.getExtras().getString("body");
 	qAns=intent.getExtras().getString("ans");
+   // isDrop=intent.getExtras().getString("isDropDown");
 	qData.setText(qBody);
 	if(correct.equals("true")){
 		Toast.makeText(this, "already answered correctly ",Toast.LENGTH_LONG).show();
@@ -80,6 +94,11 @@ protected void onCreate(Bundle savedInstanceState) {
 	}else{
 	qData.setText(qBody);
 	}
+//    if(isDrop.equals("true")){
+//        mEditText.setBackgroundColor(Color.TRANSPARENT);
+//    }else{
+//        spin.setBackgroundColor(Color.TRANSPARENT);
+//    }
 	
 	actionBar = getActionBar();
 	actionBar.setTitle(intent.getExtras().getString("title"));
@@ -98,43 +117,71 @@ public void onClick(View v) {
 		feedback.setText("Feedback: "+intent.getExtras().getString("feedback"));
 		img.setImageResource(R.drawable.correct);
 	}else{
-		
-	
- 	if(qAns.equals(mEditText.getText().toString())){
- 		if(mEditText.getText().toString().isEmpty()){
- 	 		QuestionsFragment.temp.setValid("false");
- 			Toast.makeText(this, "Empty Answer ",Toast.LENGTH_LONG).show();
- 	 		feedback.setText("Feedback: "+intent.getExtras().getString("feedback"));
- 	 		feedback.setTextColor(Color.RED);
- 	 		img.setImageResource(R.drawable.wrong);
- 		}
- 		else{
- 			QuestionsFragment.temp.setValid("true");
- 			//Toast.makeText(this, "Your Answer is Correct",Toast.LENGTH_LONG).show();
- 			feedback.setText("Feedback: "+intent.getExtras().getString("feedback"));
- 			feedback.setTextColor(Color.GREEN);
- 			ansCorrect="true";
- 			AnswerTask at=new AnswerTask(ansCorrect,qBody);
- 			img.setImageResource(R.drawable.correct);
- 			at.execute();
- 			
- 		}
- 	} 
- 	else{
- 		QuestionsFragment.temp.setValid("false");
- 		Toast.makeText(this, "Your Answer is Incorrect",Toast.LENGTH_LONG).show();
- 		feedback.setText("Feedback: "+intent.getExtras().getString("feedback"));
- 		feedback.setTextColor(Color.RED);
- 		img.setImageResource(R.drawable.wrong);
- 	}
+
+
+       //if(isDrop.equals("true")){
+//            if(qAns.equals(spin.getSelectedItem().toString())){
+//                    QuestionsFragment.temp.setValid("true");
+//                    //Toast.makeText(this, "Your Answer is Correct",Toast.LENGTH_LONG).show();
+//                    feedback.setText("Feedback: "+intent.getExtras().getString("feedback"));
+//                    feedback.setTextColor(Color.GREEN);
+//                    ansCorrect="true";
+//                    AnswerTask at=new AnswerTask(ansCorrect,qBody);
+//                    img.setImageResource(R.drawable.correct);
+//                    at.execute();
+//
+//
+//            }
+//            else{
+//                QuestionsFragment.temp.setValid("false");
+//                Toast.makeText(this, "" + spin.getSelectedItem().toString(),Toast.LENGTH_LONG).show();
+//                Toast.makeText(this, "" + qAns, Toast.LENGTH_LONG).show();
+//                Toast.makeText(this, "Your Answer is Incorrect",Toast.LENGTH_LONG).show();
+//                feedback.setText("Feedback: "+intent.getExtras().getString("feedback"));
+//                feedback.setTextColor(Color.RED);
+//                img.setImageResource(R.drawable.wrong);
+//            }
+        //}else{
+            if(qAns.equals(mEditText.getText().toString()) || qAns.equals(spin.getSelectedItem().toString())){
+                if(mEditText.getText().toString().isEmpty() && !qAns.equals(spin.getSelectedItem().toString())){
+                    QuestionsFragment.temp.setValid("false");
+                    Toast.makeText(this, "Empty Answer ",Toast.LENGTH_LONG).show();
+                    feedback.setText("Feedback: "+intent.getExtras().getString("feedback"));
+                    feedback.setTextColor(Color.RED);
+                    img.setImageResource(R.drawable.wrong);
+                }
+                else{
+                    QuestionsFragment.temp.setValid("true");
+                    //Toast.makeText(this, "Your Answer is Correct",Toast.LENGTH_LONG).show();
+                    feedback.setText("Feedback: "+intent.getExtras().getString("feedback"));
+                    feedback.setTextColor(Color.GREEN);
+                    ansCorrect="true";
+                    AnswerTask at=new AnswerTask(ansCorrect,qBody);
+                    img.setImageResource(R.drawable.correct);
+                    at.execute();
+
+                }
+            }
+            else{
+                QuestionsFragment.temp.setValid("false");
+                Toast.makeText(this, "Your Answer is Incorrect",Toast.LENGTH_LONG).show();
+                feedback.setText("Feedback: " + intent.getExtras().getString("feedback"));
+                feedback.setTextColor(Color.RED);
+                img.setImageResource(R.drawable.wrong);
+            }
+       // }bigelse
+
 	}
-	
+
 }
 //assigns value to button
 public void clearAnswer(View v) 
 	{
 	QuestionsFragment.temp.setValid("false");
-	tvAns.setText(null);
+	tvAns.setHint("Answer Here");
+        tvAns.setText("");
+        mEditText.getText().clear();
+        spin.setSelection(0);
 	feedback.setText(null);
 	ansCorrect="false";
 	AnswerTask at2 = new AnswerTask(ansCorrect,qBody);

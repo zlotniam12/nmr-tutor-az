@@ -7,13 +7,15 @@ public class Question {
 	int qnum;
 	String isCorrect;
 	String feedback;
-	public Question(String qTitle, String qData, String qAns,String c, String f ) {
+	String isDrop;
+	public Question(String qTitle, String qData, String qAns, String c, String f) {
 		super();
 		this.qTitle = qTitle;
 		this.qData = qData;
 		this.qAns = qAns;
 		this.isCorrect=c;
 		this.feedback=f;
+		//this.isDrop = isDrop;
 	}
 	
 	public String getFeedback() {
@@ -54,6 +56,12 @@ public class Question {
 	public void setValid(String ct) {
 		this.isCorrect = ct;
 	}
+//	public String getDropDown() {
+//		return isDrop;
+//	}
+//	public void setDropDown(String isDrop) {
+//		this.isDrop= isDrop;
+//	}
 	
 
 }

@@ -49,7 +49,7 @@ public class QuestionsFragment extends Fragment implements OnItemClickListener, 
 	  ArrayList<String> qlist;
 	  ArrayList<Question> questions;
 	 ArrayAdapter<String> arrayAdapter;
-	 String jsondata, isCorrect, qData,qAns, qTitle, feedback, selectedPeak,path; //selectedProblem
+	 String jsondata, isCorrect, qData,qAns, qTitle, feedback, selectedPeak,path, isDrop; //selectedProblem
 	 static String selectedPeak1;
      Bundle extras;
 	 //static String selectedProblem1;
@@ -78,6 +78,7 @@ public class QuestionsFragment extends Fragment implements OnItemClickListener, 
 			adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			path = getActivity().getFilesDir().getAbsolutePath();
 			file = new File(path + "/question.txt");
+		    //writes json String to the file if the file doesn't exist
 			if (!file.exists()) {
 				writeToString(file, loadJSONFromAsset());
 				Toast.makeText(getActivity(), readFromFile(), Toast.LENGTH_SHORT).show();
@@ -108,6 +109,7 @@ public class QuestionsFragment extends Fragment implements OnItemClickListener, 
      	i.putExtra("ans", questions.get(arg2).getqAns());
      	i.putExtra("isCorrect", questions.get(arg2).getValid());
      	i.putExtra("feedback", questions.get(arg2).getFeedback());
+          // i.putExtra("isDropDown", questions.get(arg2).getDropDown());
 		//Toast.makeText(getActivity(), "Peak: ",Toast.LENGTH_LONG).show();
      	 startActivity(i);
        }
@@ -178,7 +180,7 @@ public class QuestionsFragment extends Fragment implements OnItemClickListener, 
 			try {
 
                 extras = MainActivity.peakdata.getExtras();
-				InputStream is = getActivity().getAssets().open(extras.getString("0"));
+				InputStream is = getActivity().getAssets().open("peak1.json");
 				int size = is.available();
 
 				byte[] buffer = new byte[size];
@@ -225,12 +227,13 @@ public class QuestionsFragment extends Fragment implements OnItemClickListener, 
 			          qData=json_data.getString("Question");
 			          qAns=json_data.getString("Answer");
 			          isCorrect=json_data.getString("isCorrect");
+                       // isDrop=json_data.getString("isDropDown");
 			          feedback=json_data.getString("Feedback");
 			          JSONpeak=json_data.getString("Peak");
 			          //JSONproblem = json_data.getString("Problem");
 			         //if(sentproblem.equals(JSONproblem)
 			              if(sentpeak.equals(JSONpeak)){
-			        	  questions.add(new Question(qTitle,qData,qAns,isCorrect,feedback));
+			        	  questions.add(new Question(qTitle,qData,qAns,isCorrect, feedback));
 			        	  qlist.add(qTitle);
 			          }
 
@@ -246,7 +249,7 @@ public class QuestionsFragment extends Fragment implements OnItemClickListener, 
 			if(qlist.isEmpty()){
 				qlist.add("no Questions");
 			}
-		     arrayAdapter = new ArrayAdapter<String>(getActivity(),R.layout.question_item,R.id.tvQTitle,qlist );
+		     arrayAdapter = new ArrayAdapter<String>(getActivity(),R.layout.question_item, R.id.tvQTitle,qlist );
 	         lv.setAdapter(arrayAdapter);
 //            Fragment questionsFragment = getActivity().getSupportFragmentManager().findFragmentById(R.layout.fragment_questions);
 //            if (questionsFragment instanceof Fragment) {
