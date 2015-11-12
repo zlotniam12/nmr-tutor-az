@@ -29,8 +29,6 @@ static WebView  w;
 	public void onAttach(Activity activity){
 		super.onAttach(activity);
 
-		//super.onCreateView();
-
 	}
 }
 

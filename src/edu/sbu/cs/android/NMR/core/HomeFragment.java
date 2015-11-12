@@ -21,19 +21,20 @@ import android.widget.AdapterView.OnItemClickListener;
 
 
 public class HomeFragment extends Fragment {
-//	  public interface OnItemSelectedListener {
-//	        public void onItemSelected();
-//	    }
-//	  OnItemClickListener mListener;
-//	  @Override
-//	    public void onAttach(Activity activity) {
-//	        super.onAttach(activity);
-//	        try {
-//	            mListener = (OnItemClickListener) activity;
-//	        } catch (ClassCastException e) {
-//	            throw new ClassCastException(activity.toString() + " must implement OnArticleSelectedListener");
-//	        }
-//	    }
+	  public interface OnSelectedListener {
+	        public void onSelected();
+
+      }
+    OnSelectedListener mListener;
+	  @Override
+	    public void onAttach(Activity activity) {
+	        super.onAttach(activity);
+	        try {
+	            mListener = (OnSelectedListener) activity;
+	        } catch (ClassCastException e) {
+	            throw new ClassCastException(activity.toString() + " must implement OnArticleSelectedListener");
+	        }
+	    }
 //	    public void onGridItemClick(GridView gridview, View v, int position, long id) {
 //	        // Append the clicked item's row ID with the content provider Uri
 //	        

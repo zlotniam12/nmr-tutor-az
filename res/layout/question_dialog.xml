@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="Queston" />
+        android:text="Question" />
 
     <TextView
         android:id="@+id/tvAns"
@@ -56,7 +56,6 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:background="@android:drawable/dialog_holo_light_frame"
-        android:layout_marginBottom="1dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:text="[Select Answer Below: ]"
@@ -68,13 +67,13 @@
             android:layout_height="100dp"
             android:layout_marginLeft="100dp"
             android:layout_marginRight="100dp"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="5dp" />
 	 
     <Button
         android:id="@+id/btAnsSubmit"
         android:layout_width="253dp"
         android:layout_height="50dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="3dp"
         android:layout_marginLeft="25dp"
         android:text="Submit" />
 
