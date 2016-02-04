@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--Arranges the answer text box and spinner in a single page, with options to submit or clear the
+answer
+@author Alyssa Zlotnicki
+@version February 3, 2016-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
