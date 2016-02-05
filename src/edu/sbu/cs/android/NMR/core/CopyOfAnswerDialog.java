@@ -27,7 +27,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
+//empty comment
 public class CopyOfAnswerDialog extends DialogFragment implements OnClickListener {
 EditText mEditText;
 String qData="", ansData ,dTitle;

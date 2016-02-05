@@ -15,7 +15,8 @@ import org.json.JSONObject;
 
 import edu.sbu.cs.android.R;
 
-import android.app.ActionBar;
+import edu.sbu.cs.android.NMR.adapter.SlidingTabLayout;
+import edu.sbu.cs.android.NMR.adapter.TabsPagerAdapter;;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -54,7 +55,7 @@ Button bt2;
 Intent intent;
 File file;
 ImageView img;
-private ActionBar actionBar;
+private SlidingTabLayout tabLayout;;
 	private String[] spinloader;
 protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
@@ -100,8 +101,8 @@ protected void onCreate(Bundle savedInstanceState) {
 //        spin.setBackgroundColor(Color.TRANSPARENT);
 //    }
 	
-	actionBar = getActionBar();
-	actionBar.setTitle(intent.getExtras().getString("title"));
+	tabLayout = (SlidingTabLayout) findViewById(R.id.tabs);
+	//tabLayout.setTitle(intent.getExtras().getString("title"));
 }
 
 @Override
@@ -184,9 +185,9 @@ public void clearAnswer(View v)
         spin.setSelection(0);
 	feedback.setText(null);
 	ansCorrect="false";
-	AnswerTask at2 = new AnswerTask(ansCorrect,qBody);
+	AnswerTask at = new AnswerTask(ansCorrect,qBody);
 	img.setImageBitmap(null);
-	at2.execute();
+	at.execute();
 	}
 public void writeToString(File file,String str){
 	FileOutputStream stream = null;

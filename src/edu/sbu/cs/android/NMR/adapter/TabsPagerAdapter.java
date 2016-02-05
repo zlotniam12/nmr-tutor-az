@@ -9,9 +9,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 public class TabsPagerAdapter extends FragmentPagerAdapter {
-
-	public TabsPagerAdapter(FragmentManager fm) {
+    private CharSequence tabNames[];
+    private int tabNum;
+	public TabsPagerAdapter(FragmentManager fm, CharSequence mNames[], int mTabNum) {
 		super(fm);
+        this.tabNames = mNames;
+        this.tabNum = mTabNum;
 	}
 
 	@Override
@@ -39,7 +42,33 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
 	@Override
 	public int getCount() {
 		// get item count - equal to number of tabs
-		return 4;
+		return tabNum;
 	}
+	// gets title for ech tab in the strip
+//	@Override
+//	public CharSequence getPageTitle(int index) {
+//        switch (index) {
+//            case 0:
+//                // Home fragment activity
+//                return "Home";
+//            case 1:
+//                // Spectra fragment activity
+//                return "Spectra";
+//            case 2:
+//                // Questions fragment activity
+//                return "Questions";
+//            case 3:
+//                // draw fragment activity
+//                return "SolveIt";
+//
+//        }
+//
+//        return null;
+//
+//	}
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return tabNames[position];
+    }
 
 }

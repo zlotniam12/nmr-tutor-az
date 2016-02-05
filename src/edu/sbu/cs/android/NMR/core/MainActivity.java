@@ -2,32 +2,27 @@ package edu.sbu.cs.android.NMR.core;
 
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 
+import edu.sbu.cs.android.NMR.adapter.SlidingTabLayout;
 import edu.sbu.cs.android.NMR.adapter.TabsPagerAdapter;
 //import edu.sbu.cs.android.NMR.core.HomeFragment.OnItemSelectedListener;
 import edu.sbu.cs.android.R;
-import android.app.ActionBar;
-import android.app.ActionBar.Tab;
-import android.app.FragmentManager;
-//import android.support.v4.app.FragmentManager;
-import android.app.FragmentTransaction;
-//import android.support.v4.app.FragmentTransaction;
+
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.view.View;
 
 
-public class MainActivity extends FragmentActivity implements HomeFragment.OnSelectedListener, ActionBar.TabListener
+public class MainActivity extends FragmentActivity implements HomeFragment.OnSelectedListener
 {
 	Bundle bd;
 	Intent intent = new Intent();
@@ -35,36 +30,49 @@ public class MainActivity extends FragmentActivity implements HomeFragment.OnSel
 	private NonSwipeableViewPager viewPager;
 	//DrawingView dv=new DrawingView(this,);
 	private TabsPagerAdapter mAdapter;
-	private ActionBar actionBar;
+    private int tabsNum = 4;
+    SlidingTabLayout tabLayout;
+//	Toolbar toolbar;
+Bundle pdata=new Bundle();
+	//private ActionBar actionBar;
 	// Tab titles
 	private String[] tabs = { "Home", "Spectra", "Questions", "SolveIt" };
 	private boolean lock=false;
 	File file;
 	String path;
 	private int problem = 0;
-    static Intent peakdata = new Intent();
+//    Intent peakdata = new Intent(MainActivity.this, QuestionsFragment.class);
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		viewPager = (NonSwipeableViewPager) findViewById(R.id.pager);
 		viewPager.invalidate();
+    //    toolbar = (Toolbar) findViewById(R.id.tool_bar);
 		bd=new Bundle();
+//		peakdata.putExtra("", 0);
 		path = getFilesDir().getAbsolutePath();
 		file = new File(path + "/question.txt");
-		actionBar = getActionBar();
-		actionBar.setDisplayShowTitleEnabled(false);
-		mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
+		mAdapter = new TabsPagerAdapter(getSupportFragmentManager(), tabs, tabsNum);
 		viewPager.setAdapter(mAdapter);
-		actionBar.setHomeButtonEnabled(false);
+        tabLayout = (SlidingTabLayout) findViewById(R.id.tabs);
+        tabLayout.setDistributeEvenly(true); // To make the Tabs Fixed set this true, This makes the tabs Space Evenly in Available width
+        tabLayout.setViewPager(viewPager);
+        tabLayout.setVisibility(View.VISIBLE);
 
-		actionBar.setIcon(R.drawable.chalkboardicon_2);
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-		// Adding Tabs
-		for (String tab_name : tabs) {
-			actionBar.addTab(actionBar.newTab().setText(tab_name)
-					.setTabListener(this));
-		}
+      //  toolbar.setLogo(R.drawable.chalkboardicon_2);
+
+
+//        actionBar = getActionBar();
+//        actionBar.setDisplayShowTitleEnabled(false);
+//        actionBar.setHomeButtonEnabled(false);
+//        actionBar.setIcon(R.drawable.chalkboardicon_2);
+//		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+//		// Adding Tabs
+//		for (String tab_name : tabs) {
+//			actionBar.addTab(actionBar.newTab().setText(tab_name)
+//					.setTabListener(this));
+//		}
 		/**
 		 * on swiping the viewpager make respective tab selected
 		 * */
@@ -74,7 +82,8 @@ public class MainActivity extends FragmentActivity implements HomeFragment.OnSel
 			public void onPageSelected(int position) {
 				if(lock){
 				}else{
-					actionBar.setSelectedNavigationItem(position);
+					viewPager.setCurrentItem(position, true);
+				//	actionBar.setSelectedNavigationItem(position);
 				}
 			}
 
@@ -148,12 +157,26 @@ public class MainActivity extends FragmentActivity implements HomeFragment.OnSel
             SpectraFragment.w.loadUrl("file:///android_asset/ir.html");
 	    	SpectraFragment.w.getSettings().setBuiltInZoomControls(true);
 	    	SpectraFragment.w.getSettings().setDisplayZoomControls(false);
-            peakdata.putExtra("0", "peak2.json");
-            Fragment questions = getSupportFragmentManager().findFragmentById(R.layout.fragment_questions);
-            android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.detach(questions);
-            ft.attach(questions);
+            pdata.putString("problem", "" + getProblem());
+            //set Fragmentclass Arguments
+            QuestionsFragment fragobj=new QuestionsFragment();
+            fragobj.setArguments(pdata);
+            Fragment frg = null;
+            Fragment frg2 = null;
+            FragmentManager fragMan;
+            fragMan = getSupportFragmentManager();
+            frg = fragMan.findFragmentByTag("fragment_spectra");
+            frg2 = fragMan.findFragmentByTag("fragment_questions");
+            final FragmentTransaction ft = fragMan.beginTransaction();
+            ft.detach(frg);
+            ft.attach(frg);
+            ft.detach(frg2);
+            ft.attach(frg2);
             ft.commit();
+
+        //    android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//            ft.attach(questions);
+         //   ft.commit();
 	        return true;
 	    case R.id.action_CNMR:
 	    	SpectraFragment.w.loadUrl("file:///android_asset/cnmr.html");
@@ -165,10 +188,11 @@ public class MainActivity extends FragmentActivity implements HomeFragment.OnSel
 	    case R.id.action_Lock:
 	    	lock=!lock;
 	    	if(lock)
-	    	actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+                tabLayout.setVisibility(View.INVISIBLE);
+	  //  	actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 	    	else
-	    		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-	    	
+	    //		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+                tabLayout.setVisibility(View.VISIBLE);
 	    	viewPager.setBlockSwipe(lock);
 	        return true;
 	    default:
@@ -211,23 +235,23 @@ public class MainActivity extends FragmentActivity implements HomeFragment.OnSel
 //	        return super.onOptionsItemSelected(item);
 //	    }
 //	}
-	@Override
-	public void onTabReselected(Tab tab, FragmentTransaction ft) {
-	}
-
-	@Override
-	public void onTabSelected(Tab tab, FragmentTransaction ft) {
-		// on tab selected
-		// show respected fragment view
-		viewPager.setCurrentItem(tab.getPosition());
-	}
-
-	@Override
-	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-//        ft.detach(questionsfragment);
-//        ft.attach(tab);
-//        ft.commit();
-	}
+//	@Override
+//	public void onTabReselected(Tab tab, FragmentTransaction ft) {
+//	}
+//
+//	@Override
+//	public void onTabSelected(Tab tab, FragmentTransaction ft) {
+//		// on tab selected
+//		// show respected fragment view
+//		viewPager.setCurrentItem(tab.getPosition());
+//	}
+//
+//	@Override
+//	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+////        ft.detach(questionsfragment);
+////        ft.attach(tab);
+////        ft.commit();
+//	}
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -251,15 +275,28 @@ public class MainActivity extends FragmentActivity implements HomeFragment.OnSel
 
 	@Override
 	public void onSelected() {
-        android.support.v4.app.FragmentManager fragMan;
-                fragMan = getSupportFragmentManager();
-        android.support.v4.app.FragmentTransaction fragmentTransaction = fragMan.beginTransaction();
-        android.support.v4.app.Fragment newFragment = new SpectraFragment();
-        android.support.v4.app.FragmentTransaction transaction;
-        transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.layout.fragment_spectra, newFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+//        android.support.v4.app.FragmentManager fragMan;
+//                fragMan = getSupportFragmentManager();
+//        android.support.v4.app.FragmentTransaction fragmentTransaction = fragMan.beginTransaction();
+//        android.support.v4.app.Fragment newFragment = new SpectraFragment();
+//        android.support.v4.app.FragmentTransaction transaction;
+//        transaction = getSupportFragmentManager().beginTransaction();
+//        transaction.replace(R.layout.fragment_spectra, newFragment);
+//        transaction.addToBackStack(null);
+//        transaction.commit();
+        Fragment frg = null;
+        Fragment frg2 = null;
+        FragmentManager fragMan;
+        fragMan = getSupportFragmentManager();
+        frg = fragMan.findFragmentByTag("fragment_spectra");
+        frg2 = fragMan.findFragmentByTag("fragment_questions");
+        final FragmentTransaction ft = fragMan.beginTransaction();
+        ft.detach(frg);
+        ft.attach(frg);
+        ft.detach(frg2);
+        ft.attach(frg2);
+        ft.commit();
+
 //		Fragment spectraFragment = getSupportFragmentManager().findFragmentById(R.layout.fragment_spectra);
 //		if (spectraFragment instanceof Fragment) {
 //			android.support.v4.app.FragmentTransaction fragTran;

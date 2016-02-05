@@ -51,7 +51,7 @@ public class QuestionsFragment extends Fragment implements OnItemClickListener, 
 	 ArrayAdapter<String> arrayAdapter;
 	 String jsondata, isCorrect, qData,qAns, qTitle, feedback, selectedPeak,path, isDrop; //selectedProblem
 	 static String selectedPeak1;
-     Bundle extras;
+
 	 //static String selectedProblem1;
 	 static Question temp;
 	 QuestionTask task;
@@ -59,6 +59,7 @@ public class QuestionsFragment extends Fragment implements OnItemClickListener, 
 	 Spinner spinner;
 	 //Spinner spinner2;
 	 File file;
+    Bundle args;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -178,9 +179,12 @@ public class QuestionsFragment extends Fragment implements OnItemClickListener, 
 		public String loadJSONFromAsset() {
 			String json = null;
 			try {
+              // String strtext=getArguments().getString("problem");
 
-                extras = MainActivity.peakdata.getExtras();
-				InputStream is = getActivity().getAssets().open("peak1.json");
+				Intent pi = getActivity().getIntent();
+				String problem = pi.getStringExtra("problem");
+
+				InputStream is = getActivity().getAssets().open("peak" + problem + ".json");
 				int size = is.available();
 
 				byte[] buffer = new byte[size];
