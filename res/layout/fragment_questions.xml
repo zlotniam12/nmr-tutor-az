@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Creates a list of different questions that the user can select from
+@author Alyssa Zlotnicki
+@version February 3, 2016-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+     android:background="#545454">
+
+	<ListView
+	    android:id="@+id/lvQuestions"
+	    android:layout_width="match_parent"
+	    android:layout_height="200dp"
+	    android:layout_alignParentTop="true"
+	    android:layout_centerHorizontal="true"
+	    android:layout_margin="10dp"
+	    android:background="#ffffff" >
+	</ListView>
+
+	<LinearLayout
+		android:orientation="vertical"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_alignParentRight="true"
+		android:layout_alignParentEnd="true"
+		android:layout_marginBottom="63dp"></LinearLayout>
+
+</RelativeLayout>

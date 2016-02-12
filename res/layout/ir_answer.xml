@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
+    android:transitionGroup="false"
+    android:addStatesFromChildren="true"
+    android:fadeScrollbars="false">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="What functional groups are present in the molecule - Click on the name to select. "
+        android:id="@+id/textView"
+        android:layout_column="0" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <CheckBox
+                android:layout_width="179dp"
+                android:layout_height="wrap_content"
+                android:text="sp3 hybridized C-H"
+                android:id="@+id/checkBox"
+                android:checked="false" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="triple bond"
+                android:id="@+id/checkBox13"
+                android:checked="false"
+                android:layout_column="13" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="carbonyl"
+                android:id="@+id/checkBox3"
+                android:checked="false" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="nitrile"
+                android:id="@+id/checkBox12"
+                android:checked="false"
+                android:layout_column="13" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="sp2 hybridized C-H"
+                android:id="@+id/checkBox2"
+                android:checked="false" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="aldehyde"
+                android:id="@+id/checkBox11"
+                android:checked="false"
+                android:layout_column="13" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ester"
+                android:id="@+id/checkBox4"
+                android:checked="false" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="carboxylic acid"
+                android:id="@+id/checkBox10"
+                android:checked="false"
+                android:layout_column="13" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="aromatic"
+                android:id="@+id/checkBox5"
+                android:checked="false" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="sp hybridized C-H"
+                android:id="@+id/checkBox7"
+                android:checked="false"
+                android:layout_column="13" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="C-O stretch "
+                android:id="@+id/checkBox6"
+                android:checked="false" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ketone"
+                android:id="@+id/checkBox14"
+                android:layout_column="13"
+                android:checked="false" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="OH"
+                android:id="@+id/checkBox8"
+                android:checked="false" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ester"
+                android:id="@+id/checkBox15"
+                android:layout_column="13"
+                android:checked="false" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NH"
+                android:id="@+id/checkBox9"
+                android:checked="false" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="amide"
+                android:id="@+id/checkBox16"
+                android:layout_column="13"
+                android:checked="false" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="chlorine"
+                android:id="@+id/checkBox17"
+                android:checked="false" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="aromatic"
+                android:id="@+id/checkBox18"
+                android:layout_column="13"
+                android:checked="false" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="carbonyl"
+                android:id="@+id/checkBox19"
+                android:checked="false" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="nitro"
+                android:id="@+id/checkBox20"
+                android:layout_column="13"
+                android:checked="false" />
+        </TableRow>
+
+    </TableLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:weightSum="1"
+        android:layout_weight="0.56">
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="253dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="25dp"
+            android:text="Submit" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="253dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="25dp"
+            android:onClick="clearAnswer"
+            android:text="Clear Answer" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,11 @@
+[
+  {
+		"QuestionTitle": "Functional Groups",
+		"Question": "What functional groups are present in the molecule - Click on the name to select.",
+		"Answer": "sp3 hybridized C-H, sp2 hybridized C-H, carbonyl, ester, aromatic, C-O stretch",
+		"isCorrect": "false",
+        "isDropDown": "false",
+		"Peak": "Peak A",
+		"Feedback": "The ratio is the number associated with the area under the peak, and with the areas under other peaks."
+	}
+]
