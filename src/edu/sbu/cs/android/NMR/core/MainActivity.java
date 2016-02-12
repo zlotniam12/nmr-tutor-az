@@ -24,16 +24,22 @@ import android.view.View;
 
 public class MainActivity extends FragmentActivity implements HomeFragment.OnSelectedListener
 {
-	Bundle bd;
-	Intent intent = new Intent();
+	@Override
+	public void onSelected(String text){
+		SpectraFragment frag = (SpectraFragment)
+				getSupportFragmentManager().findFragmentById(R.layout.fragment_spectra);
+		frag.updateText(text);
 
+	}
+	Bundle bd;
+//	Intent intent = new Intent();
 	private NonSwipeableViewPager viewPager;
 	//DrawingView dv=new DrawingView(this,);
 	private TabsPagerAdapter mAdapter;
     private int tabsNum = 4;
     SlidingTabLayout tabLayout;
 //	Toolbar toolbar;
-Bundle pdata=new Bundle();
+//Bundle pdata=new Bundle();
 	//private ActionBar actionBar;
 	// Tab titles
 	private String[] tabs = { "Home", "Spectra", "Questions", "SolveIt" };
@@ -157,10 +163,10 @@ Bundle pdata=new Bundle();
             SpectraFragment.w.loadUrl("file:///android_asset/ir.html");
 	    	SpectraFragment.w.getSettings().setBuiltInZoomControls(true);
 	    	SpectraFragment.w.getSettings().setDisplayZoomControls(false);
-            pdata.putString("problem", "" + getProblem());
+            //pdata.putString("problem", "" + getProblem());
             //set Fragmentclass Arguments
             QuestionsFragment fragobj=new QuestionsFragment();
-            fragobj.setArguments(pdata);
+            //fragobj.setArguments(pdata);
             Fragment frg = null;
             Fragment frg2 = null;
             FragmentManager fragMan;
@@ -273,8 +279,8 @@ Bundle pdata=new Bundle();
 	    this.problem = num;
 	}
 
-	@Override
-	public void onSelected() {
+//	@Override
+//	public void onSelected() {
 //        android.support.v4.app.FragmentManager fragMan;
 //                fragMan = getSupportFragmentManager();
 //        android.support.v4.app.FragmentTransaction fragmentTransaction = fragMan.beginTransaction();
@@ -284,18 +290,18 @@ Bundle pdata=new Bundle();
 //        transaction.replace(R.layout.fragment_spectra, newFragment);
 //        transaction.addToBackStack(null);
 //        transaction.commit();
-        Fragment frg = null;
-        Fragment frg2 = null;
-        FragmentManager fragMan;
-        fragMan = getSupportFragmentManager();
-        frg = fragMan.findFragmentByTag("fragment_spectra");
-        frg2 = fragMan.findFragmentByTag("fragment_questions");
-        final FragmentTransaction ft = fragMan.beginTransaction();
-        ft.detach(frg);
-        ft.attach(frg);
-        ft.detach(frg2);
-        ft.attach(frg2);
-        ft.commit();
+//        Fragment frg = null;
+//        Fragment frg2 = null;
+//        FragmentManager fragMan;
+//        fragMan = getSupportFragmentManager();
+//        frg = fragMan.findFragmentByTag("fragment_spectra");
+//        frg2 = fragMan.findFragmentByTag("fragment_questions");
+//        final FragmentTransaction ft = fragMan.beginTransaction();
+//        ft.detach(frg);
+//        ft.attach(frg);
+//        ft.detach(frg2);
+//        ft.attach(frg2);
+//        ft.commit();
 
 //		Fragment spectraFragment = getSupportFragmentManager().findFragmentById(R.layout.fragment_spectra);
 //		if (spectraFragment instanceof Fragment) {
@@ -305,6 +311,6 @@ Bundle pdata=new Bundle();
 //			fragTran.attach(spectraFragment);
 //			fragTran.commit();
 
-		}
+//		}
 
 }

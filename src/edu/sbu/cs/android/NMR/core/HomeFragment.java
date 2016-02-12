@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -21,7 +22,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class HomeFragment extends Fragment {
 	  public interface OnSelectedListener {
-	        public void onSelected();
+	        public void onSelected(String text);
 
       }
 
@@ -29,7 +30,8 @@ public class HomeFragment extends Fragment {
 	  @Override
 	    public void onAttach(Activity activity) {
 	        super.onAttach(activity);
-	        try {
+          this.getActivity();
+          try {
 	            mListener = (OnSelectedListener) activity;
 	        } catch (ClassCastException e) {
 	            throw new ClassCastException(activity.toString() + " must implement OnArticleSelectedListener");
@@ -44,9 +46,8 @@ public class HomeFragment extends Fragment {
 //	        mListener.onItemSelected(JsonAsset);
 //	    }
 GridView gridview;
-    Intent pi = new Intent(getActivity(), QuestionsFragment.class);
-    Intent pj = new Intent(getActivity(), SpectraFragment.class);
-
+//    Intent pi = new Intent(getActivity(), QuestionsFragment.class);
+//    Intent pj = new Intent(getActivity(), SpectraFragment.class);
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -62,11 +63,12 @@ GridView gridview;
                 ((MainActivity) getActivity()).setProblem(position);
                 switch (position) {
                     case 0:
-                        SpectraFragment.w.loadUrl("file:///android_asset/nmr0.html");
-                        pi.putExtra("problem", "0");
-                        pj.putExtra("problem", "0");
-                        getActivity().startActivity(pi);
-                        getActivity().startActivity(pj);
+                       // SpectraFragment.w.loadUrl("file:///android_asset/nmr0.html");
+                        mListener.onSelected("file:///android_asset/nmr0.html");
+//                        pi.putExtra("problem", "0");
+//                        pj.putExtra("problem", "0");
+//                        getActivity().startActivity(pi);
+//                        getActivity().startActivity(pj);
                         FragmentManager fragMan;
                         fragMan = getFragmentManager();
                         Fragment frg= fragMan.findFragmentByTag("fragment_spectra");
@@ -85,11 +87,12 @@ GridView gridview;
 //                        ft.commit();
 
                     case 1:
-                        SpectraFragment.w.loadUrl("file:///android_asset/nmr1.html");
-                        pi.putExtra("problem", "1");
-                        pj.putExtra("problem", "1");
-                        getActivity().startActivity(pi);
-                        getActivity().startActivity(pj);
+                     //   SpectraFragment.w.loadUrl("file:///android_asset/nmr1.html");
+                        mListener.onSelected("file:///android_asset/nmr1.html");
+//                        pi.putExtra("problem", "1");
+//                        pj.putExtra("problem", "1");
+//                        getActivity().startActivity(pi);
+//                        getActivity().startActivity(pj);
                         fragMan = getFragmentManager();
                         frg= fragMan.findFragmentByTag("fragment_spectra");
                         frg2 = fragMan.findFragmentByTag("fragment_questions");
@@ -100,10 +103,11 @@ GridView gridview;
                         ft2.attach(frg2);
                         ft2.commit();
                     case 2:
-                        SpectraFragment.w.loadUrl("file:///android_asset/nmr2.html");
-                        pi.putExtra("problem", "2");
-                        pj.putExtra("problem", "2");
-                        getActivity().startActivity(pi);
+                //        SpectraFragment.w.loadUrl("file:///android_asset/nmr2.html");
+                        mListener.onSelected("file:///android_asset/nmr2.html");
+//                        pi.putExtra("problem", "2");
+//                        pj.putExtra("problem", "2");
+//                        getActivity().startActivity(pi);
                         fragMan = getFragmentManager();
                         frg= fragMan.findFragmentByTag("fragment_spectra");
                         frg2 = fragMan.findFragmentByTag("fragment_questions");
